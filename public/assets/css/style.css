@@ -1,0 +1,103 @@
+/* CSS definition file containing site stylesheet */
+body {
+}
+
+#content {
+    max-width: 1200px;
+    margin:auto;
+}
+
+#footer {
+    font-size: small;
+    font-style:italic;
+    text-align:center;
+}
+
+.row>div {
+    margin-bottom:10px;
+}
+
+.oneCell {
+    padding:1em;
+    width:300px;
+    text-align:center;
+}
+
+.gallaryTable{
+    margin: 30px auto;
+}
+
+.gallaryTable Caption{
+    font-size:200%;
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 15px;
+}
+
+.assemblyContent{
+    background-color: #E6B597;
+}
+
+.assemblyDiv{
+    background-color: #F6DAC5;
+    padding-top: 5px;
+}
+
+.checkbox{
+    width: 200px !important;
+}
+
+#assemblyBtn, #returnBtn, #shipBtn{
+    text-align: center;
+    display:inline-block;
+    margin-left: 150px;
+    margin-right: 150px;
+    width: 200px;
+    line-height: 300%;
+    font-weight: bold;
+}
+
+.twoBtn{
+    width:100%;
+    margin:auto;
+    text-align: center;
+}
+
+
+/* Remove rounded borders from list */
+.list-group-item:first-child {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Remove border and add padding to thumbnails */
+.thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+}
+
+.thumbnail p {
+    margin-top: 15px;
+    color: #555;
+}
+
+.thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+
+.displayName{
+    font-weight: bold;
+}
+
+.dataInfo{
+    display: block;
+    margin: auto;
+    width:50px;
+}
