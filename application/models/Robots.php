@@ -6,9 +6,9 @@
  * Date: 08/02/2017
  * Time: 3:08 PM
  */
-class Robots extends CI_Model
+class Robots extends MY_Model
 {
-
+    /*
     var $data = array(
         array('id' => '1', 'topPardId' => '1', 'torsoPartId' => '1', 'bottomPartId' => '1',
             'typeId' => '1', 'location' => 'a.jpg', 'dateTime' => '2016-06-18'),
@@ -23,29 +23,13 @@ class Robots extends CI_Model
         array('id' => '6', 'topPardId' => '6', 'torsoPartId' => '6', 'bottomPartId' => '6',
             'typeId' => '3', 'location' => 'w.jpg', 'dateTime' => '2016-10-20')
     );
+    */
 
     // Constructor
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct('Robot', 'id');
     }
-
-    // retrieve all of the robots
-    public function all()
-    {
-        return $this->data;
-    }
-
-    // find only one robot
-    public function get($which)
-    {
-        // iterate over the data until we find the one we want
-        foreach ($this->data as $record)
-            if ($record['id'] == $which)
-                return $record;
-        return null;
-    }
-
 
 
 }

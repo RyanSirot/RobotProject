@@ -7,7 +7,7 @@
  * Time: 3:46 PM
  */
 //Model representing the 4 different Robot Type
-class RobotType extends CI_Model
+class Robottype extends CI_Model
 {
     var $data = array(
         array('id' => '1', 'name' => 'household'),

@@ -22,8 +22,13 @@ class Welcome extends Application
 		// prepare for data
         $numPartsOnHand = sizeof($this->parts->all());
         $numRobotsOnHand = sizeof($this->robots->all());
-        $spent = 100000;
-        $earned = 9999999999;
+
+        $var = $this->account->head();
+        $spent = $var[0]->money_spend;
+        $earned = $var[0]->money_earned;
+
+        //$spent = 100000;
+        //$earned = 9999999999;
 
         $arrayToShow = array('numPartsOnHand' => $numPartsOnHand, 'numRobotsOnHand' => $numRobotsOnHand, 'spent' => $spent,
             'earned' => $earned);
@@ -42,6 +47,11 @@ class Welcome extends Application
         $this->table->set_caption('Central Data');
         $rows = $this->table->make_columns($cellsForData, 1);
         $this->data['tableData'] = $this->table->generate($rows);
+
+        // show roles
+        $role = $this->session->userdata('userrole');
+        $this->data['pagetitle'] = 'CuteRobot ('. $role . ')';
+        ///
 
         $this->data['pagebody'] = 'welcome_message';
 		$this->render(); 

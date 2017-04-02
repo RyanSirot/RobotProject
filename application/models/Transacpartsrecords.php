@@ -12,7 +12,7 @@
  * @author Jing
  */
 
-class TransacPartsRecords extends CI_Model {
+class Transacpartsrecords extends CI_Model {
 // The data comes from http://www.quotery.com/top-100-funny-quotes-of-all-time/?PageSpeed=noscript
 
     public $data;

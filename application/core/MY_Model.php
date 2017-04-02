@@ -339,7 +339,7 @@ class MY_Model extends CI_Model implements Data_mapper {
 	// Retrieve records from the beginning of a table.
 	function head($count = 10)
 	{
-		$this->db->limit(10);
+		$this->db->limit($count);
 		$this->db->order_by($this->_keyField, 'asc');
 		$query = $this->db->get($this->_tableName);
 		return $query->result();

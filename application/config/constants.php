@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+defined('ROLE_GUEST') OR define('ROLE_GUEST', 'Guest');
+defined('ROLE_OWNER') OR define('ROLE_OWNER', 'Supervisor');
+defined('ROLE_BOSS') OR define('ROLE_BOSS', 'Boss');
+defined('ROLE_WORKER') OR define('ROLE_WORKER', 'Worker');
+defined('BASE_URL') OR define('BASE_URL', 'https://umbrella.jlparry.com');
+
+
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace

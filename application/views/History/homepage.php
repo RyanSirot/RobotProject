@@ -14,17 +14,26 @@
     <table class = "table table-striped">
         <thead bgcolor="#f2cdb3">
             <tr>
-                <td>Assembly ID</td>
-                <td>Date</td>
-                <td>Robot ID</td>
+                <td>assembly ID</td>
+                <td>part Top CACode</td>
+                <td>part Body CACode</td>
+                <td>part Btm CACode</td>
+                <td>assembly Price</td>
+                <td>robotID</td> <!-- Replace with Robot type-->
+                <td>assembly Date</td>
+                <td></td>
             </tr>
         <thead>
         <tbody>
         {assembly}
         <tr>
             <td>{assemblyID}</td>
-            <td>{date}</td>
-            <td>{robotID}</td>
+            <td>{partTopCACode}</td>
+            <td>{partBodyCACode}</td>
+            <td>{partBtmCACode}</td>
+            <td>{assemblyPrice}</td>
+            <td>{robotID}</td> <!-- Replace with Robot type-->
+            <td>{assemblyDateTime}</td>
         </tr>
         {/assembly}
         </tbody>
@@ -36,17 +45,19 @@
     <table class = "table table-striped">
         <thead bgcolor="#f2cdb3">
             <tr>
-                <td>Shipments ID</td>
-                <td>Date</td>
-                <td>Robot ID</td>
+                <td>shipment ID</td>
+                <td>shipment Profits</td>
+                <td>robotID</td> <!-- Replace with Robot type-->
+                <td>shipment Date</td>
             </tr>
         </thead>
         <tbody>
         {shipment}
         <tr>
             <td>{shipmentID}</td>
-            <td>{date}</td>
-            <td>{robotID}</td>
+            <td>{shipmentProfit}</td>
+            <td>{robotID}</td> <!-- Replace with Robot type-->
+            <td>{shipmentDateTime}</td>
         </tr>
         {/shipment}
     </tbody>
@@ -54,21 +65,33 @@
 </div>
 
 <div class = "container">
-    <h2>Purchases of Parts History</h2>
+    <h2>Purchase of Parts History</h2>
     <table class = "table table-striped">
         <thead bgcolor="#f2cdb3">
         <tr>
             <td>Purchase ID</td>
-            <td>Date</td>
-            <td>Part ID</td>
+            <td>Parts Purchased</td>
+            <td>Cost</td>
+            <td>Purchase Date</td>
         </tr>
         </thead>
         <tbody>
         {purchase}
         <tr>
-            <td>{purchaseID}</td>
-            <td>{date}</td>
-            <td>{partID}</td>
+            <td>{id}</td>
+            <td>{partonecacode},
+                {parttwocacode},
+                {partthreecacode},
+                {partfourcacode},
+                {partfivecacode},
+                {partsixcacode},
+                {partsevencacode},
+                {parteightcacode},
+                {partninecacode},
+                {parttencacode}
+            </td>
+            <td>{cost}</td>
+            <td>{datetime}</td>
         </tr>
         {/purchase}
         </tbody>
@@ -76,21 +99,23 @@
 </div>
 
 <div class = "container">
-    <h2>Returns of Parts History</h2>
+    <h2>Returned Parts History</h2>
     <table class = "table table-striped">
         <thead bgcolor="#f2cdb3">
         <tr>
             <td>Return ID</td>
-            <td>Date</td>
-            <td>Part ID</td>
+            <td>Part Returned</td>
+            <td>Profits</td>
+            <td>Date Returned</td>
         </tr>
         </thead>
         <tbody>
             {return}
             <tr>
-                <td>{returnID}</td>
-                <td>{date}</td>
-                <td>{partID}</td>
+                <td>{id}</td>
+                <td>{partcacode}</td>
+                <td>{earning}</td>
+                <td>{datetime}</td>
             </tr>
             {/return}
         </tbody>
