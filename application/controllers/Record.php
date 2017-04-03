@@ -139,6 +139,36 @@ class Record extends Application
         return $this->parser->parse('History/_itemNav',$parms,true);
     }
 
+
+    ///////////////////////////////////////////////////////
+
+//    // retrieve all of the transaction history entries
+//    public function all($column = 'transacDateTime', $filterModel = 'all', $filterLine = 'all')
+//    {
+//        $this->db->order_by($column, 'asc');
+//        $this->db->from('transactions');
+//
+//        if($filterLine != 'all') {
+//            //$this->db->where('line', $filterLine);
+//        }
+//        if($filterModel != 'all') {
+//            //$this->db->where('model', $filterModel);
+//        }
+//
+//        $query = $this->db->get();
+//        return $query->result();
+//    }
+//
+//    public function filter($filter, $column = 'timestamp') {
+//        $this->db->order_by($column, 'asc');
+//        $this->db->from('history');
+//        $this->db->where('line', "Household");
+//        $query = $this->db->get();
+//        return $query->result();
+//    }
+
+
+
     // Show a single page of todo items
     private function show_page($recordArray)
     {
@@ -148,73 +178,61 @@ class Record extends Application
             if (!empty($record->status))
                 $record->status = $this->statuses->get($record->status)->name;
 
-           // if(){}
+            $parts = $this->getParts($record->transacType, $record->transactionID);
 
-            $finishedRecord['transactionID'] = $record->transactionID;
-            $finishedRecord['transacType'] = $record->transacType;
-            $finishedRecord['parts'] = $this->getParts($record->transacType, $record->transactionID);
-            $finishedRecord['transacMoney'] = $record->transacMoney;
-            $finishedRecord['transacDateTime'] = $record->transacDateTime;
-
-            $result .= $this->parser->parse('History/_history', (array) $finishedRecord, true);
+            $filterThisRecord = false;
+            if($this->filterLine != 'all') {
+                echo $this->filterLine. "|";
+                echo $parts['partLines'];
+                if (strpos($parts['partLines'], $this->filterLine) === false) {
+                    $filterThisRecord = true;
+                }
+            }
+            if($this->filterModel != 'all') {
+                echo $this->filterModel;
+                if (strpos($parts['partModels'], $this->filterModel) === false) {
+                    $filterThisRecord = true;
+                }
+            }
+            if($filterThisRecord == false){
+                $finishedRecord['transactionID'] = $record->transactionID;
+                $finishedRecord['transacType'] = $record->transacType;
+                $finishedRecord['parts'] = $parts['partNames'];
+                $finishedRecord['transacMoney'] = $record->transacMoney;
+                $finishedRecord['transacDateTime'] = $record->transacDateTime;
+                $result .= $this->parser->parse('History/_history', (array) $finishedRecord, true);
+            }
 
         }
         $this->data['history'] = $result;
         $this->renderHistory();
     }
 
-    ///////////////////////////////////////////////////////
-
-    // retrieve all of the transaction history entries
-    public function all($column = 'transacDateTime', $filterModel = 'all', $filterLine = 'all')
-    {
-        $this->db->order_by($column, 'asc');
-        $this->db->from('transactions');
-
-        if($filterLine != 'all') {
-            //$this->db->where('line', $filterLine);
-        }
-        if($filterModel != 'all') {
-            //$this->db->where('model', $filterModel);
-        }
-
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    public function filter($filter, $column = 'timestamp') {
-        $this->db->order_by($column, 'asc');
-        $this->db->from('history');
-        $this->db->where('line', "Household");
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    private function getHistory($record, $filterModel, $filterLine){
-        $result = '';
-        echo $this->getParts($record->transacType, $record->transactionID);
-        $parts = $this->getParts($record->transacType, $record->transactionID);
-        $filterThisRecord = false;
-        if($filterLine != 'all') {
-            if (strpos($parts['partLines'], $filterLine) === false) {
-                $filterThisRecord = true;
-            }
-        }
-        if($filterModel != 'all') {
-            if (strpos($parts['partModels'], $filterLine) === false) {
-                $filterThisRecord = true;
-            }
-        }
-        if($filterThisRecord == false){
-            $finishedRecord['transactionID'] = $record->transactionID;
-            $finishedRecord['transacType'] = $record->transacType;
-            $finishedRecord['parts'] = $parts['partNames'];
-            $finishedRecord['transacMoney'] = $record->transacMoney;
-            $finishedRecord['transacDateTime'] = $record->transacDateTime;
-            $result .= $this->parser->parse('History/_history', (array) $finishedRecord, true);
-        }
-        return $result;
-    }
+//    private function getHistory($record){
+//        $result = '';
+//        $parts = $this->getParts($record->transacType, $record->transactionID);
+//
+//        $filterThisRecord = false;
+//        if($this->filterLine != 'all') {
+//            if (strpos($parts['partLines'], $this->filterLine) === false) {
+//                $filterThisRecord = true;
+//            }
+//        }
+//        if($this->filterModel != 'all') {
+//            if (strpos($parts['partModels'], $this->filterModel) === false) {
+//                $filterThisRecord = true;
+//            }
+//        }
+//        if($filterThisRecord == false){
+//            $finishedRecord['transactionID'] = $record->transactionID;
+//            $finishedRecord['transacType'] = $record->transacType;
+//            $finishedRecord['parts'] = $parts['partNames'];
+//            $finishedRecord['transacMoney'] = $record->transacMoney;
+//            $finishedRecord['transacDateTime'] = $record->transacDateTime;
+//            $result .= $this->parser->parse('History/_history', (array) $finishedRecord, true);
+//        }
+//        return $result;
+//    }
 
     private function getParts($transacType, $transacID){
         $partsData = array();
@@ -340,9 +358,9 @@ class Record extends Application
                 $this->parts->get($PartsRecords[0]->parttencacode)->line. ", ";
             }
         }
-        echo $partsData['partNames'] . "|";
-        echo $partsData['partLines'] . "|";
-        echo $partsData['partModels'] . "| |";
+//        echo $partsData['partNames'] . "|";
+//        echo $partsData['partLines'] . "|";
+//        echo $partsData['partModels'] . "| |";
         return $partsData;
     }
 
